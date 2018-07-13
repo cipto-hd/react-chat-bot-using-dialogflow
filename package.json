@@ -1,8 +1,9 @@
 {
-  "name": "react-chat-box-using-dialogflow",
+  "name": "react-chat-bot-using-dialogflow",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description":
+    " I use these technology stacks: React,  Redux, React-redux, Dialogflow",
+  "keywords": ["bot", "react", "chat", "dialogflow"],
   "main": "src/index.js",
   "dependencies": {
     "api-ai-javascript": "2.0.0-beta.21",

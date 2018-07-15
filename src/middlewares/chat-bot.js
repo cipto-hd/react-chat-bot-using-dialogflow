@@ -18,37 +18,52 @@ const asyncSendMessage = async text => {
 
 export default ({ getState, dispatch }) => next => action => {
   next(action);
+  const messagesLen = () => getState().messages.length;
 
   if (action.type === types["CHAT/MESSAGE_REQUEST"]) {
     const { text } = action.payload.message;
 
     /** async block */
     (async () => {
-      console.log("[chatbot:start async] ");
+      console.log(
+        "[chatbot:async] messagesLen: ",
+        messagesLen(),
+        " (before asyncSendMessage)"
+      );
+      console.log("[chatbot:async] will asyncSendMessage");
       let [err, speech] = await asyncSendMessage(text);
-      console.log("[chatbot:finish async] ");
+      console.log("[chatbot:async] finish asyncSendMessage");
+      console.log(
+        "[chatbot:async] messagesLen: ",
+        messagesLen(),
+        " (after asyncSendMessage)"
+      );
 
       // simulate error
       err = randomBool({ likelihood: 10 }) ? new Error("Error, bro!") : null;
 
       console.log("[Error Check]: ", err);
-      // conditionally send action message based upon error var
-      err
-        ? next(msgChatMessageError(err))
-        : next(msgChatMessageSuccess(speech));
 
-      // err
-      //   ? dispatch(msgChatMessageError(err))
-      //   : dispatch(msgChatMessageSuccess(speech));
+      // conditionally send action message based upon error var
+      next(err ? msgChatMessageError(err) : msgChatMessageSuccess(speech));
+      // dispatch(err ? msgChatMessageError(err) : msgChatMessageSuccess(speech));
 
       // executed asynchronously after messages has increased
-      console.log("[chatbot:async] ", getState().messages.length);
+      console.log(
+        "[chatbot:async] messagesLen: ",
+        messagesLen(),
+        " (after successfully push message into state)"
+      );
     })();
     /** **************** */
   }
 
   // executed immediately
-  console.log("[chatbot:immediately] ", getState().messages.length);
+  console.log(
+    "[chatbot:outside async] messagesLen: ",
+    messagesLen(),
+    " (last line of code in the middleware)".toUpperCase()
+  );
 
   // next(action);
 };

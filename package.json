@@ -1,8 +1,8 @@
 {
-  "name": "react-chat-bot-using-dialogflow",
+  "name": "react-chat-bot-using-dialogflow-our-own-redux-middleware",
   "version": "1.0.0",
   "description":
-    " I use these technology stacks: React,  Redux, React-redux, Dialogflow",
+    " I use these technology stacks: React,  Redux, React-redux,  Our-Own-Redux-Middleware, Dialogflow",
   "keywords": ["bot", "react", "chat", "dialogflow"],
   "main": "src/index.js",
   "dependencies": {

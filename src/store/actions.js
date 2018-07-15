@@ -2,8 +2,9 @@ import types from "./action-types";
 
 let isErrorMessage = false;
 let onProcess = false;
-let sender = 'Bot'
+let sender = "Bot";
 let error = null;
+console.log("CHECK: ACTION ENTERED ONCE");
 
 // action creator
 export const msgChatMessageRequest = text => ({

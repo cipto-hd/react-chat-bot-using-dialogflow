@@ -1,5 +1,7 @@
 import types from "./action-types";
 
+console.log("CHECK: REDUCER ENTERED ONCE");
+
 const initState = {
   messages: [
     {
